@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Todo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class TodoController extends Controller
 {
@@ -69,5 +70,10 @@ class TodoController extends Controller
         ])->delete();
         $success['todo'] = 'Delete Todo Successfully';
         return response()->json(['success' => $success], 200);
+    }
+
+    public function caching()
+    {
+        Cache::put('key', 'value', $seconds = 10);
     }
 }
