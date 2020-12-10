@@ -1,0 +1,4 @@
+12. add user form command line
+
+php artisan tinker
+factory(App\Todo::class, 10)->create();
