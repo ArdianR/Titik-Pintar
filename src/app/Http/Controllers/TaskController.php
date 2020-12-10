@@ -86,4 +86,14 @@ class TaskController extends Controller
         $success['todo'] = Todo::where('status', $state)->get();
         return response()->json(['success' => $success], 200);
     }
+
+    public function search($task)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $success['todo'] = Todo::whereLike('name', $task)->get();
+        return response()->json(['success' => $success], 200);
+    }
 }
