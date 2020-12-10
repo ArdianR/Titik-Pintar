@@ -36,7 +36,7 @@ services:
     networks:
       - laravel
     volumes:
-      - mysql:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
   phpmyadmin:
     depends_on:
       - mysql

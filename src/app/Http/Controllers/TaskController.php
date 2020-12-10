@@ -96,4 +96,10 @@ class TaskController extends Controller
         $success['todo'] = Todo::whereLike('name', $task)->get();
         return response()->json(['success' => $success], 200);
     }
+
+    public function newest()
+    {
+        $success['todo'] = Todo::orderBy('created_at', 'DESC')->get();;
+        return response()->json(['success' => $success], 200);
+    }
 }
