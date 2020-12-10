@@ -76,4 +76,11 @@ class TodoController extends Controller
     {
         Cache::put('key', 'value', $seconds = 10);
     }
+
+    public function undo($key)
+    {
+        if (Cache::has($key)) {
+            return Cache::get($key);
+        }
+    }
 }
