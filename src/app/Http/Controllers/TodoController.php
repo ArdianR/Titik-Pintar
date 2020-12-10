@@ -6,6 +6,8 @@ use App\Todo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Mail\Email;
+use Illuminate\Support\Facades\Mail;
 
 class TodoController extends Controller
 {
@@ -82,5 +84,11 @@ class TodoController extends Controller
         if (Cache::has($key)) {
             return Cache::get($key);
         }
+    }
+
+    public function email()
+    {
+        Mail::to('nsa@example.net')->send(new Email());
+        return "Email Send";
     }
 }

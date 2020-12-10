@@ -33,3 +33,4 @@ Route::put('task/search/{task}', 'TaskController@search');
 Route::get('task/newest', 'TaskController@newest');
 Route::get('task/timestamp', 'TaskController@timestamp');
 Route::put('task/accessible/{access}/{id}', 'TodoController@accessible');
+Route::get('todo/email', 'TodoController@email');
