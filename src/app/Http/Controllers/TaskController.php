@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 
 class TaskController extends Controller
 {
-    # section is task = 0
+    # section = 0
+    # task = 0
     # status 1 = todo & 2 = done
 
     public function show($id)
@@ -108,6 +109,22 @@ class TaskController extends Controller
         $todo = Todo::findOrFail(1);
         $diff = date_diff(date_create($todo->created_at), date("Y-m-d h:i:sa", $d));
         $success['todo'] = $diff->format("%h% hour ago");
+        return response()->json(['success' => $success], 200);
+    }
+
+    public function accessible($access, $id)
+    {
+        if ($access == "sections") {
+            $success['todo'] = Todo::where([
+                'section' => 0,
+                'id' => $id
+            ])->get();
+        } else {
+            $success['todo'] = Todo::where([
+                'task' => 0,
+                'id' => $id
+            ])->get();
+        }
         return response()->json(['success' => $success], 200);
     }
 }

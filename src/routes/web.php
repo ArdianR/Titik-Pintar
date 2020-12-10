@@ -32,3 +32,4 @@ Route::put('task/filter_state/{state}', 'TaskController@filter_state');
 Route::put('task/search/{task}', 'TaskController@search');
 Route::get('task/newest', 'TaskController@newest');
 Route::get('task/timestamp', 'TaskController@timestamp');
+Route::put('task/accessible/{access}/{id}', 'TodoController@accessible');
