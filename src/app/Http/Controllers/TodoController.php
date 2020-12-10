@@ -21,7 +21,6 @@ class TodoController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'section' => 'required|integer',
-            'task' => 'required|integer',
             'status' => 'required|integer',
         ]);
 
@@ -37,7 +36,7 @@ class TodoController extends Controller
 
     public function read()
     {
-        $success['todo'] = Todo::where('task', 0);
+        $success['todo'] = Todo::where('task', 0)->get();
         return response()->json(['success' => $success], 200);
     }
 
@@ -46,7 +45,6 @@ class TodoController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'section' => 'required|integer',
-            'task' => 'required|integer',
             'status' => 'required|integer',
         ]);
 
