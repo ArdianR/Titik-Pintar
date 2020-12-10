@@ -62,4 +62,18 @@ class TaskController extends Controller
         $success['todo'] = 'Delete Todo Successfully';
         return response()->json(['success' => $success], 200);
     }
+
+    public function change_state(Request $request, $id)
+    {
+        $this->validate($request, [
+            'status' => 'required|integer',
+        ]);
+
+        $todo = Todo::findOrFail($id);
+        $todo->update([
+            'status' => $request->status
+        ]);
+        $success['todo'] = $todo;
+        return response()->json(['success' => $success], 200);
+    }
 }
