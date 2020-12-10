@@ -28,7 +28,7 @@ class TodoController extends Controller
         $success['todo'] = Todo::create([
             'name' => $request->name,
             'section' => $request->section,
-            'task' => $request->task,
+            'task' => 0,
             'status' => $request->status
         ]);
 
@@ -37,7 +37,7 @@ class TodoController extends Controller
 
     public function read()
     {
-        $success['todo'] = Todo::all();
+        $success['todo'] = Todo::where('task', 0);
         return response()->json(['success' => $success], 200);
     }
 
@@ -50,11 +50,13 @@ class TodoController extends Controller
             'status' => 'required|integer',
         ]);
 
-        $todo = Todo::findOrFail($id);
+        $todo = Todo::where([
+            'id' => $id,
+            'task' => 0
+        ]);
         $todo->update([
             'name' => $request->name,
             'section' => $request->section,
-            'task' => $request->task,
             'status' => $request->status
         ]);
         $success['todo'] = $todo;
@@ -63,7 +65,10 @@ class TodoController extends Controller
 
     public function delete($id)
     {
-        Todo::findOrFail($id)->delete();
+        Todo::where([
+            'id' => $id,
+            'task' => 0
+        ])->delete();
         $success['todo'] = 'Delete Todo Successfully';
         return response()->json(['success' => $success], 200);
     }
