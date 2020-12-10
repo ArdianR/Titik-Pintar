@@ -102,4 +102,12 @@ class TaskController extends Controller
         $success['todo'] = Todo::orderBy('created_at', 'DESC')->get();;
         return response()->json(['success' => $success], 200);
     }
+
+    public function timestamp()
+    {
+        $todo = Todo::findOrFail(1);
+        $diff = date_diff(date_create($todo->created_at), date("Y-m-d h:i:sa", $d));
+        $success['todo'] = $diff->format("%h% hour ago");
+        return response()->json(['success' => $success], 200);
+    }
 }
