@@ -11,6 +11,12 @@ class TaskController extends Controller
     # section is task = 0
     # status 1 = todo & 2 = done
 
+    public function show($id)
+    {
+        $success['task'] = Todo::findOrFail($id);
+        return response()->json(['success' => $success], 200);
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [
